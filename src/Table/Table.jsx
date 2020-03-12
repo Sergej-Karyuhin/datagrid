@@ -300,10 +300,10 @@ class Table extends Component {
 
   render() {
     return (
-      <div className="wrapper" style={{ backgroundColor: "#42648b" }}>
+      <div className="wrapper">
 
-        <table className="table table-hover" style={{ backgroundColor: "#fff", color: "#42648b" }}>
-          <thead>
+        <table className="table" style={{ backgroundColor: "#fff", color: "#42648b" }}>
+          <thead className="table-head">
             <tr>
               <th>#</th>
               <th onClick={this.sort.bind(this, 0)}>

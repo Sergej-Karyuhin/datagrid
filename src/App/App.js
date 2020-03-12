@@ -7,7 +7,7 @@ import "./style.css";
 class App extends Component {
   render() {
     return (
-      <div className="container">
+      <div className="container" style={{ backgroundColor: "#42648b" }}>
         <Table />
       </div>
     );

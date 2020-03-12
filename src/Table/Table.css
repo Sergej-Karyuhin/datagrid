@@ -23,9 +23,19 @@
 }
 .form {
   margin-left: 20px;
+  position: fixed;
+  right: 30px;
 }
 tr:hover {
   cursor: pointer;
   color: #42648b !important;
   text-decoration: underline;
+}
+.table-head th {
+  position: sticky;
+  top: 0;
+  background-color: #edeef0;
+}
+.table {
+  max-width: 70%;
 }

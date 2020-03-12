@@ -3,6 +3,7 @@ body {
 }
 
 .container {
+  padding-top: 10px;
   min-width: 100%;
   text-align: center;
 }

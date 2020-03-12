@@ -261,6 +261,42 @@ class Table extends Component {
     }, function() { this.props.sortUsersInfo(this.state.sortedColumns, this.state.priority, this.state.textFilter, this.state.searchOptions, this.state.toggleButton); });
   }
 
+  textFilterChange = (event) => {
+    this.setState({
+      textFilter: event.target.value,
+    }, function() { this.props.sortUsersInfo(this.state.sortedColumns, this.state.priority, this.state.textFilter, this.state.searchOptions, this.state.toggleButton) });
+  }
+
+  isInputBlocked = (event) => {
+    if (event === null) {
+      this.setState({
+        textFilter: '',
+        searchOptions: event
+      }, function() { this.props.sortUsersInfo(this.state.sortedColumns, this.state.priority, this.state.textFilter, this.state.searchOptions, this.state.toggleButton) });
+      this.searchInputRef.current.setAttribute('disabled', true);
+      return;
+    }
+    this.searchInputRef.current.removeAttribute('disabled');
+    this.setState({
+      searchOptions: event.map((obj) => obj.value)
+    }, function() { this.props.sortUsersInfo(this.state.sortedColumns, this.state.priority, this.state.textFilter, this.state.searchOptions, this.state.toggleButton) });
+  }
+
+  selectPositions = (event) => {
+    if (event !== null) {
+      this.resetSortedColumns = {
+        ...this.resetSortedColumns,
+        position: event.map((el) => el.value)
+      }
+      this.setState({
+        prePositionInfo: event,
+        sortedColumns: {
+          ...this.state.sortedColumns,
+          position: event.map((el) => el.value)
+        },
+      }, function() { this.props.sortUsersInfo(this.state.sortedColumns, this.state.priority, this.state.textFilter, this.state.searchOptions, this.state.toggleButton) });
+    }
+  }
 
   render() {
     return (
@@ -300,6 +336,66 @@ class Table extends Component {
           </tbody>
         </table>
 
+
+        <div className="form">
+          <div>
+            <input
+              ref={this.searchInputRef}
+              type="text"
+              value={this.state.textFilter}
+              onChange={this.textFilterChange}
+              placeholder="Поиск..."
+              className="input"
+            />
+
+            <Select
+              ref={this.searchSelectRef}
+              isMulti
+              defaultValue={[this.getColumnsArr()[0]]}
+              name="columns"
+              options={this.getColumnsArr()}
+              className="basic-multi-select"
+              classNamePrefix="select"
+              onChange={this.isInputBlocked}
+              className="select-setting"
+              placeholder="Выберете поля..."
+            />
+          </div>
+
+            <Select
+              ref={this.positionsSelectRef}
+              isMulti
+              name="position"
+              options={['Пицца', 'Суши', 'Шашлык'].map((el) => {
+                return { value: el, label: el };
+              })}
+              value={this.state.prePositionInfo}
+              className="basic-multi-select"
+              classNamePrefix="select"
+              onChange={this.selectPositions}
+              placeholder="Выберете блюдо..."
+            />
+
+            <div className='cats'>
+              <p className='cats__title'>Только любители котов: </p>
+              <ToggleButton
+                inactiveLabel={'Выкл'}
+                activeLabel={'Вкл'}
+                value={this.state.toggleButton}
+                onToggle={(value) => {
+                  this.setState({
+                    toggleButton: !this.state.toggleButton,
+                    sortedColumns: {
+                      ...this.state.sortedColumns,
+                      cat: 0,
+                    }
+                  }, function() { this.props.sortUsersInfo(this.state.sortedColumns, this.state.priority, this.state.textFilter, this.state.searchOptions, this.state.toggleButton) });
+                }}
+              />
+            </div>
+
+
+          </div>
 
       </div>
     );

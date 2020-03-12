@@ -1,8 +1,8 @@
 import React, { Component } from "react";
+
+import Table from "../Table/data";
 import "./bootstrap.min.css";
 import "./style.css";
-
-import Table from "../Table";
 
 class App extends Component {
   render() {

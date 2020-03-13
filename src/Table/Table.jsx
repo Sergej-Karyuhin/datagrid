@@ -329,7 +329,7 @@ class Table extends Component {
               </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="tbody">
             {!this.props.users
               ? null
               : this.props.users.map((user, i) => this.renderUsers(user, i))}

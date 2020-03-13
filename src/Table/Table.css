@@ -26,11 +26,6 @@
   position: fixed;
   right: 30px;
 }
-tr:hover {
-  cursor: pointer;
-  color: #42648b !important;
-  text-decoration: underline;
-}
 .table-head th {
   position: sticky;
   top: 0;
@@ -38,4 +33,9 @@ tr:hover {
 }
 .table {
   max-width: 70%;
+}
+.tbody tr:hover {
+  cursor: pointer;
+  color: #42648b !important;
+  background-color: #edeef0;
 }
